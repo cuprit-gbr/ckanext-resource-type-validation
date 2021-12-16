@@ -138,6 +138,10 @@ class ResourceTypeValidator:
                 sniffed_mimetype = filename_mimetype = claimed_mimetype =\
                     format_mimetype or claimed_mimetype or filename_mimetype
             else:
+                # TS: Disabled for now as we get upload errors for zip archives
+                # the validator does not correctly match the mimetype with the sniffed mimetype
+                pass
+                """
                 raise ValidationError(
                     {'upload': [
                         self.mismatching_upload_message.format(
@@ -145,6 +149,7 @@ class ResourceTypeValidator:
                             sniffed_mimetype)
                     ]}
                 )
+                """
 
         # If the file extension or format matches a generic type,
         # then sniffing should say the same.
