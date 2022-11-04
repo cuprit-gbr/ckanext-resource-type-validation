@@ -96,12 +96,12 @@ class ResourceTypeValidator:
             upload_file.seek(0, os.SEEK_SET)
             LOG.debug('Upload sniffing indicates MIME type %s',
                       sniffed_mimetype)
-        elif IS_REMOTE_URL_PATTERN.search(
-                resource.get('url', 'http://example.com')
-        ):
-            LOG.debug('%s is not an uploaded resource, skipping validation',
-                      resource.get('id', 'New resource'))
-            return
+            if IS_REMOTE_URL_PATTERN.search(
+                    resource.get('url', 'http://example.com')
+            ):
+                LOG.debug('%s is not an uploaded resource, skipping validation',
+                          resource.get('id', 'New resource'))
+                return
         else:
             LOG.debug('No upload in progress for %s; just sanity-check',
                       resource.get('id', 'new resource'))
